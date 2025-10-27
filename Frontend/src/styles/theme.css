@@ -1,0 +1,20 @@
+:root {
+  /* Background and text */
+  --bg-color: #1a1a1a;         /* Dark overlay for contrast */
+  --text-color: #fff5f5;       /* Soft white text */
+  --text-muted: #d1bfbf;       /* Muted warm tone */
+
+  /* Inputs and borders */
+  --input-bg: rgba(255, 255, 255, 0.1); 
+  --border-color: rgba(255, 255, 255, 0.2);
+
+  /* Primary colors inspired by sunset image */
+  --primary-color: #ff7b54;    /* Sunset orange */
+  --primary-hover: #ff9770;    /* Lighter orange/pink */
+  
+  /* Accent (secondary tone from sky/pink shades) */
+  --accent-color: #ff4d6d;     /* Vibrant pinkish red */
+
+  /* Button text */
+  --btn-text: #ffffff;
+}

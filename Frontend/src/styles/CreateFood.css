@@ -1,0 +1,90 @@
+.create-food-container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px 25px;
+  background-color: #ffffff; /* clean white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* slightly deeper shadow */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.create-food-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.create-food-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.6rem;
+}
+
+.create-food-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-food-form label {
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.create-food-form input,
+.create-food-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.create-food-form input:focus,
+.create-food-form textarea:focus {
+  border-color: rgb(200, 94, 8);
+  box-shadow: 0 0 8px rgba(200, 94, 8, 0.3);
+  outline: none;
+}
+
+.create-food-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.create-food-form button {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: rgb(200, 94, 8);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.create-food-form button:hover {
+  background-color: rgb(220, 110, 20);
+  transform: translateY(-2px);
+}
+
+/* Responsive: Tablets and larger screens */
+@media (min-width: 600px) {
+  .create-food-container {
+    max-width: 500px;
+    padding: 25px 30px;
+  }
+}
+
+/* Responsive: Large screens */
+@media (min-width: 1024px) {
+  .create-food-container {
+    max-width: 600px;
+  }
+}

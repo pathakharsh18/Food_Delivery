@@ -1,0 +1,136 @@
+/* ===== Root Variables ===== */
+:root {
+  --bg-color: #fff;            /* Dark background for video */
+  --text-light: #000;          /* White text for overlays */
+  --primary-color: #ff7b54;    /* Button & highlight */
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Profile Container ===== */
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  color: var(--text-light);
+  background: var(--bg-color);
+  min-height: 100vh;
+}
+
+/* ===== Profile Header ===== */
+.profile-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 12px;
+  border: 2px solid var(--primary-color);
+}
+
+.profile-name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.profile-address {
+  font-size: 14px;
+  color: grey;
+  margin-top: 4px;
+}
+
+/* ===== Stats ===== */
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-title {
+  font-size: 14px;
+  color: grey;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ===== Video Grid ===== */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 videos per row */
+  gap: 12px;
+  padding: 8px;
+  max-height: 75vh; /* scrollable if many videos */
+  overflow-y: auto;
+}
+
+.profile-grid-item {
+  width: 100%;
+  aspect-ratio: 9/16;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+}
+
+/* Video inside grid */
+.profile-grid-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay for title, description & button */
+.video-overlay {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background: var(--overlay-bg);
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.video-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.video-description {
+  font-size: 12px;
+  color: #ddd;
+}
+
+.visit-store-btn {
+  width: fit-content;
+  padding: 4px 8px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ===== No Videos ===== */
+.no-videos {
+  text-align: center;
+  color: #ccc;
+  padding: 20px;
+}
