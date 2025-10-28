@@ -6,18 +6,15 @@ import { Heart, Bookmark, MessageCircle, Home as HomeIcon } from "lucide-react";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
-  const [interaction, setInteraction] = useState({}); // liked/saved state per video
-  const [showComment, setShowComment] = useState({}); // toggle comment box per video
-  const [comments, setComments] = useState({});       // comments array per video
-  const [commentInputs, setCommentInputs] = useState({}); // current input per video
+  const [interaction, setInteraction] = useState({}); 
+  const [showComment, setShowComment] = useState({}); 
+  const [comments, setComments] = useState({}); 
+  const [commentInputs, setCommentInputs] = useState({}); 
   const videoRefs = useRef([]);
-  const commentInputRefs = useRef({}); // refs for comment inputs
+  const commentInputRefs = useRef({}); 
   const navigate = useNavigate();
 
-<<<<<<< HEAD
-=======
   // Fetch videos + saved info
->>>>>>> c9af136 (Added all untracked file)
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -25,24 +22,12 @@ const Home = () => {
         const allVideos = res.data.foodItems || [];
         setVideos(allVideos);
 
-<<<<<<< HEAD
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            video.play().catch((err) => console.log("Autoplay failed:", err));
-          } else {
-            video.pause();
-=======
         const initInteraction = {};
         const initShowComment = {};
         const initComments = {};
         const initInputs = {};
 
-        allVideos.forEach(v => {
+        allVideos.forEach((v) => {
           initInteraction[v._id] = { liked: false, saved: false };
           initShowComment[v._id] = false;
           initComments[v._id] = [];
@@ -56,21 +41,24 @@ const Home = () => {
 
         // Fetch saved videos
         const savedRes = await axios.get("http://localhost:3000/api/food/saved", { withCredentials: true });
-        const savedIds = savedRes.data.savedItems.map(item => item._id);
-        setInteraction(prev => {
+        const savedIds = savedRes.data.savedItems.map((item) => item._id);
+        setInteraction((prev) => {
           const updated = { ...prev };
-          savedIds.forEach(id => { if (updated[id]) updated[id].saved = true; });
+          savedIds.forEach((id) => {
+            if (updated[id]) updated[id].saved = true;
+          });
           return updated;
         });
 
         // Fetch comments for each video
-        allVideos.forEach(async v => {
+        allVideos.forEach(async (v) => {
           try {
-            const commentRes = await axios.get(`http://localhost:3000/api/food/${v._id}/comments`, { withCredentials: true });
-            setComments(prev => ({ ...prev, [v._id]: commentRes.data || [] }));
+            const commentRes = await axios.get(`http://localhost:3000/api/food/${v._id}/comments`, {
+              withCredentials: true,
+            });
+            setComments((prev) => ({ ...prev, [v._id]: commentRes.data || [] }));
           } catch (err) {
             console.error("Error fetching comments", err);
->>>>>>> c9af136 (Added all untracked file)
           }
         });
       } catch (err) {
@@ -85,8 +73,8 @@ const Home = () => {
   // Auto play/pause while scrolling
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           const video = entry.target;
           if (entry.isIntersecting) video.play().catch(() => {});
           else video.pause();
@@ -94,15 +82,15 @@ const Home = () => {
       },
       { threshold: 0.8 }
     );
-    videoRefs.current.forEach(v => v && observer.observe(v));
+    videoRefs.current.forEach((v) => v && observer.observe(v));
     return () => observer.disconnect();
   }, [videos]);
 
   // Like functionality
-  const toggleLike = async id => {
+  const toggleLike = async (id) => {
     try {
       await axios.post("http://localhost:3000/api/food/like", { foodId: id }, { withCredentials: true });
-      setInteraction(prev => ({ ...prev, [id]: { ...prev[id], liked: !prev[id]?.liked } }));
+      setInteraction((prev) => ({ ...prev, [id]: { ...prev[id], liked: !prev[id]?.liked } }));
     } catch (err) {
       console.error("Like error:", err);
       if (err.response?.status === 401) navigate("/login");
@@ -110,10 +98,10 @@ const Home = () => {
   };
 
   // Save functionality
-  const toggleSave = async id => {
+  const toggleSave = async (id) => {
     try {
       await axios.post("http://localhost:3000/api/food/save", { foodId: id }, { withCredentials: true });
-      setInteraction(prev => ({ ...prev, [id]: { ...prev[id], saved: !prev[id]?.saved } }));
+      setInteraction((prev) => ({ ...prev, [id]: { ...prev[id], saved: !prev[id]?.saved } }));
     } catch (err) {
       console.error("Save error:", err);
       if (err.response?.status === 401) navigate("/login");
@@ -121,8 +109,8 @@ const Home = () => {
   };
 
   // Comment handling
-  const toggleCommentBox = id => {
-    setShowComment(prev => {
+  const toggleCommentBox = (id) => {
+    setShowComment((prev) => {
       const updated = { ...prev, [id]: !prev[id] };
       if (updated[id]) {
         setTimeout(() => commentInputRefs.current[id]?.focus(), 0);
@@ -131,9 +119,9 @@ const Home = () => {
     });
   };
 
-  const handleCommentChange = (id, value) => setCommentInputs(prev => ({ ...prev, [id]: value }));
+  const handleCommentChange = (id, value) => setCommentInputs((prev) => ({ ...prev, [id]: value }));
 
-  const addComment = async id => {
+  const addComment = async (id) => {
     const text = commentInputs[id]?.trim();
     if (!text) return;
 
@@ -144,12 +132,12 @@ const Home = () => {
         { withCredentials: true }
       );
 
-      setComments(prev => ({
+      setComments((prev) => ({
         ...prev,
-        [id]: [res.data.comment, ...(prev[id] || [])], // add new comment at top
+        [id]: [res.data.comment, ...(prev[id] || [])], 
       }));
 
-      setCommentInputs(prev => ({ ...prev, [id]: "" }));
+      setCommentInputs((prev) => ({ ...prev, [id]: "" }));
     } catch (err) {
       console.error("Error adding comment", err);
     }
@@ -170,12 +158,22 @@ const Home = () => {
     <div className="home-container">
       {videos.map((item, index) => (
         <section key={item._id} className="video-card">
-          <video ref={el => (videoRefs.current[index] = el)} src={item.video} className="video-player" muted loop playsInline />
+          <video
+            ref={(el) => (videoRefs.current[index] = el)}
+            src={item.video}
+            className="video-player"
+            muted
+            loop
+            playsInline
+          />
 
           <div className="overlay">
             <div className="right-icons">
               {/* Like */}
-              <div className={`icon ${interaction[item._id]?.liked ? "active" : ""}`} onClick={() => toggleLike(item._id)}>
+              <div
+                className={`icon ${interaction[item._id]?.liked ? "active" : ""}`}
+                onClick={() => toggleLike(item._id)}
+              >
                 <Heart />
                 <span>{interaction[item._id]?.liked ? "Liked" : "Like"}</span>
               </div>
@@ -200,12 +198,12 @@ const Home = () => {
                     </div>
                     <div className="comment-input">
                       <input
-                        ref={el => (commentInputRefs.current[item._id] = el)}
+                        ref={(el) => (commentInputRefs.current[item._id] = el)}
                         type="text"
                         placeholder="Add comment..."
                         value={commentInputs[item._id]}
-                        onChange={e => handleCommentChange(item._id, e.target.value)}
-                        onKeyDown={e => e.key === "Enter" && addComment(item._id)}
+                        onChange={(e) => handleCommentChange(item._id, e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && addComment(item._id)}
                       />
                       <button onClick={() => addComment(item._id)}>Send</button>
                     </div>
@@ -214,7 +212,10 @@ const Home = () => {
               </div>
 
               {/* Save */}
-              <div className={`icon ${interaction[item._id]?.saved ? "active" : ""}`} onClick={() => toggleSave(item._id)}>
+              <div
+                className={`icon ${interaction[item._id]?.saved ? "active" : ""}`}
+                onClick={() => toggleSave(item._id)}
+              >
                 <Bookmark />
                 <span>{interaction[item._id]?.saved ? "Saved" : "Save"}</span>
               </div>
@@ -222,7 +223,9 @@ const Home = () => {
 
             <div className="bottom-left">
               <p className="desc">{item.description || "No description"}</p>
-              <Link className="visit-btn" to={`/food-partner/${item.foodPartner}`}>Visit Store</Link>
+              <Link className="visit-btn" to={`/food-partner/${item.foodPartner}`}>
+                Visit Store
+              </Link>
 
               <div className="bottom-actions">
                 <div className="nav-icon" onClick={goToHome}>
@@ -243,3 +246,4 @@ const Home = () => {
 };
 
 export default Home;
+
